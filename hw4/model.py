@@ -163,6 +163,7 @@ def build_discriminator_ACGAN():
 	return Model(img, [validity, aux])
 	#return Model(input=img, output=features)
 
+np.random.seed(14)
 def VAE_encoder(input_img):
 	dim = 64
 	kernel_size = 5
@@ -178,12 +179,8 @@ def VAE_encoder(input_img):
 	h = Flatten()(x)
 	#h = Dense(512)(x)
 	print(h.shape)
-	#h = Flatten()(x)
 	return h
 
-#	dim = 64
-#	model.add(Dense((dim*16*4*4), input_shape=noise_shape))
-#	model.add(Reshape((4, 4, dim*16)))
 def VAE_decoder(z):
 	dim = 64
 	kernel_size = 5
@@ -299,19 +296,9 @@ def VAE():
 	def loss_KL(real, pred):
 		z_mean, z_log_var = pred[:, :latent_dim], pred[:, latent_dim:]
 		loss_KL = - 0.5 * K.sum(1.0 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
-		#loss_KL = lamb * loss_KL
-		#mu.pow(2).add_(logvar.exp()).mul_(-1).add_(1).add_(logvar)
 		return loss_KL
 	lamb = 3e-4
 	model.compile(optimizer='adam', loss=[loss_recons, loss_KL], loss_weights=[1., lamb])#, metrics=["mse"])
-
-
-	'''loss_recons = mse(K.flatten(input_img), K.flatten(decoded))
-    kl_loss = 1 + z_log_var - K.square(z_mean) - K.exp(z_log_var)
-    kl_loss = K.sum(kl_loss, axis=-1)
-    kl_loss *= -0.5
-    vae_loss = K.mean(loss_recons + lamb * kl_loss)'''
-
 
 	return model
 

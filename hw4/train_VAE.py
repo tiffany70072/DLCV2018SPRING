@@ -51,6 +51,7 @@ def problem4(): # randomly plot
 	output_32(pred, sys.argv[2] + "fig1_4.jpg", 60)
 
 def problem5():
+	np.random.seed(0)
 	path = sys.argv[1]
 	x_test = import_image(sys.argv[1])
 
@@ -97,7 +98,7 @@ def main():
 	model = load_VAE()
 	problem3(model)
 	problem4()
-	problem5()
+	#problem5()
 	
 if __name__ == '__main__':
 	main()
