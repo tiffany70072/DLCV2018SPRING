@@ -7,7 +7,8 @@ import sys
 
 h = np.load("report/VAE_problem5_h.npy")#[:100]
 h = h[:500]
-x_embedded = TSNE(n_components=2).fit_transform(h)
+np.random.seed(0)
+x_embedded = TSNE(n_components=2, random_state=14, init='pca').fit_transform(h)
 print("embedded =", x_embedded.shape)
 
 gender = []

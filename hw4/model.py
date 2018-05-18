@@ -163,7 +163,6 @@ def build_discriminator_ACGAN():
 	return Model(img, [validity, aux])
 	#return Model(input=img, output=features)
 
-np.random.seed(14)
 def VAE_encoder(input_img):
 	dim = 64
 	kernel_size = 5
@@ -261,6 +260,7 @@ def VAE_decoder2(z):
 
 # https://github.com/keras-team/keras/blob/master/examples/variational_autoencoder.py
 def VAE():
+	np.random.seed(14)
 	latent_dim = 1024
 	epsilon_std = 1.0
 
@@ -271,6 +271,7 @@ def VAE():
 	z_log_var = Dense(latent_dim, name='log_var')(h)
 	print("encoded =", z_mean.shape)
 	def sampling(args):
+		np.random.seed(14)
 	    z_mean, z_log_var = args
 	    epsilon = K.random_normal(shape=(K.shape(z_mean)[0], latent_dim), mean=0., stddev=epsilon_std, seed=14)
 	    print("epsilon =", epsilon.shape)
