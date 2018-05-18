@@ -272,14 +272,14 @@ def VAE():
 	print("encoded =", z_mean.shape)
 	def sampling(args):
 		np.random.seed(14)
-	    z_mean, z_log_var = args
-	    epsilon = K.random_normal(shape=(K.shape(z_mean)[0], latent_dim), mean=0., stddev=epsilon_std, seed=14)
-	    print("epsilon =", epsilon.shape)
-	    #std = logvar.mul(0.5).exp_()
+		z_mean, z_log_var = args
+		epsilon = K.random_normal(shape=(K.shape(z_mean)[0], latent_dim), mean=0., stddev=epsilon_std, seed=14)
+		print("epsilon =", epsilon.shape)
+		#std = logvar.mul(0.5).exp_()
 		#eps = torch.cuda.FloatTensor(std.size()).normal_()
 		#return eps.mul(std).add_(mu)
 
-	    return z_mean + K.exp(z_log_var * 0.5) * epsilon
+		return z_mean + K.exp(z_log_var * 0.5) * epsilon
 
 	z = Lambda(sampling, output_shape=(latent_dim,))([z_mean, z_log_var])
 	decoded = VAE_decoder(z)
