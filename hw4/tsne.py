@@ -7,7 +7,6 @@ import sys
 
 h = np.load("report/VAE2_problem5_h.npy")#[:100]
 h = h[:500]
-print("h =", h.shape)
 x_embedded = TSNE(n_components=2).fit_transform(h)
 print("embedded =", x_embedded.shape)
 
@@ -19,7 +18,6 @@ with open(sys.argv[1] + 'test.csv', 'rt') as csvfile:
 	for row in spamreader:
 		if flag == 1:
 			new_row = row[0].split(',')
-			#print new_row[9]
 			gender.append(new_row[8])
 		else: flag = 1
 print(len(gender), gender[:10])
