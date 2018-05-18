@@ -8,7 +8,7 @@ import sys
 def plot_VAE():
 	filename = ['report/VAE_recons_loss.npy', 'report/VAE_KLD_loss.npy']
 	title = ['MSE', "KLD"]
-	x = [i for i in range(0, 40, 1)]
+	x = [i for i in range(0, 200, 1)]
 	f, (ax1, ax2) = plt.subplots(1, 2, figsize = (10, 5))
 	ax = [ax1, ax2]
 	for i in range(2):
