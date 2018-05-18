@@ -3,7 +3,7 @@
 mkdir saved_model
 
 echo VAE testing
-
+wget -O saved_model/VAE_weights.h5 "https://www.dropbox.com/s/i2b1qyowbfvgaqp/VAE_weights.h5?dl=1"
 CUDA_VISIBLE_DEVICES=0 python3 train_VAE.py $1 $2
 echo plot loss
 python3 plot_loss.py VAE $2
