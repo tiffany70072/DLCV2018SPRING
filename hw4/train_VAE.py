@@ -44,8 +44,7 @@ def problem4(): # randomly plot
 
 	decoder_output = VAE_decoder(z_tensor)
 	decoder = Model(z_tensor, decoder_output)
-	#weights_path = 'saved_model/VAE2_epochs60_3-4_weights.h5'
-	weights_path = 'saved_model/VAE2_epochs_weights.h5'
+	weights_path = 'saved_model/VAE_weights.h5'
 	decoder.load_weights(weights_path, by_name=True)
 	pred = decoder.predict(z)
 
@@ -58,11 +57,11 @@ def problem5():
 	input_img = Input(shape=(64, 64, 3))
 	encoder_output = VAE_encoder(input_img)
 	encoder = Model(input_img, encoder_output)
-	weights_path = 'saved_model/VAE2_epochs_weights.h5'
+	weights_path = 'saved_model/VAE_weights.h5'
 	encoder.load_weights(weights_path, by_name=True)
 	h = encoder.predict(x_test)
 	print("h =", h.shape)
-	np.save('report/VAE2_problem5_h', h)
+	np.save('report/VAE_problem5_h', h)
 
 def train_VAE():
 	model = VAE()
@@ -88,7 +87,8 @@ def train_VAE():
 def load_VAE():
 	model = VAE()
 	model.summary()
-	model.load_weights('saved_model/VAE2_epochs_weights.h5')
+	#model.load_weights('saved_model/VAE2_epochs_weights.h5')
+	model.load_weights('saved_model/VAE_weights.h5')
 	return model
 
 def main():

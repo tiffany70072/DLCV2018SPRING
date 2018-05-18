@@ -5,7 +5,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import sys
 
-h = np.load("report/VAE2_problem5_h.npy")#[:100]
+h = np.load("report/VAE_problem5_h.npy")#[:100]
 h = h[:500]
 x_embedded = TSNE(n_components=2).fit_transform(h)
 print("embedded =", x_embedded.shape)
