@@ -98,7 +98,7 @@ def main():
 	model = load_VAE()
 	problem3(model)
 	problem4()
-	#problem5()
+	problem5()
 	
 if __name__ == '__main__':
 	main()
