@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 
 config = tf.ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.2
+#config.gpu_options.per_process_gpu_memory_fraction = 0.2
 #config.gpu_options.allow_growth = True
 sess = tf.Session(config=config)
 import keras
