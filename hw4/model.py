@@ -275,7 +275,7 @@ def VAE():
 	print("encoded =", z_mean.shape)
 	def sampling(args):
 	    z_mean, z_log_var = args
-	    epsilon = K.random_normal(shape=(K.shape(z_mean)[0], latent_dim), mean=0., stddev=epsilon_std)
+	    epsilon = K.random_normal(shape=(K.shape(z_mean)[0], latent_dim), mean=0., stddev=epsilon_std, seed=1)
 	    print("epsilon =", epsilon.shape)
 	    #std = logvar.mul(0.5).exp_()
 		#eps = torch.cuda.FloatTensor(std.size()).normal_()
