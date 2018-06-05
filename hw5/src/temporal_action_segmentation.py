@@ -134,11 +134,11 @@ class TemporalActionSegmentation(object):
 			self.y_train = self.y_train.reshape([-1, self.max_length, 11])
 			print('train =', self.features.shape, self.y_train.shape, self.y_train[0][:10])
 
-		self.y_valid = self.import_full_labels('valid')
-		self.y_valid = to_categorical(self.y_valid, num_classes = 11)
-		self.y_valid = self.y_valid.reshape([-1, self.max_length, 11])
-		
-		print('valid =', self.features_valid.shape, self.y_valid.shape, self.y_valid[0][:10])
+			self.y_valid = self.import_full_labels('valid')
+			self.y_valid = to_categorical(self.y_valid, num_classes = 11)
+			self.y_valid = self.y_valid.reshape([-1, self.max_length, 11])
+			
+			print('valid =', self.features_valid.shape, self.y_valid.shape, self.y_valid[0][:10])
 		
 		#np.save('data/y_train', self.y_train)
 		#np.save('data/y_valid', self.y_valid)

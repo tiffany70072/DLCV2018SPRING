@@ -82,7 +82,8 @@ def import_trimmed(data = 'valid'):
 	return videos, labels, leng_idx
 
 def import_test_trimmed():	
-	path = sys.argv[2] + '/gt_valid.csv'
+	path = sys.argv[2] 
+	print('path =', path)
 	od = reader.getVideoList(path)
 	print('len(od) =', len(od))
 
@@ -109,7 +110,7 @@ def import_test_trimmed():
 	return videos, leng_idx
 
 def import_test_groudtruth():
-	path = sys.argv[2] + '/gt_valid.csv'
+	path = sys.argv[2] 
 	od = reader.getVideoList(path)
 	print('len(od) =', len(od))
 
