@@ -294,17 +294,18 @@ class TemporalActionSegmentation(object):
 		pred = rnn_model.predict(self.features_valid)
 		print("pred.shape =", pred.shape)
 		pred = np.argmax(pred, axis = -1)
-		real = np.argmax(self.y_valid, axis = -1)
 		print("pred.shape =", pred.shape)
-
 		pred = self.reconstruct_seq(pred)
-		real = self.reconstruct_seq(real)
+
+		if self.is_train == True:
+			real = np.argmax(self.y_valid, axis = -1)
+			real = self.reconstruct_seq(real)
 
 		for i in range(5):
 			fout = open(sys.argv[2] + self.category[i] + '.txt', 'w')
 			for j in range(len(pred[i])):
 				#print(pred[i])
-				fout.write("%d\t" %real[i][j])
+				#fout.write("%d\t" %real[i][j])
 				fout.write("%d\n" %pred[i][j])
 			fout.close()
 
