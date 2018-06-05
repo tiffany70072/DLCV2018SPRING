@@ -266,7 +266,7 @@ class TemporalActionSegmentation(object):
 		np.save('../report/p3_val_acc', h4)
 
 		print('Save model')
-		rnn_model.save('../saved_model/p3_weights.h5')
+		rnn_model.save('saved_model/p3_weights.h5')
 
 	def reconstruct_seq(self, arr):
 		seq = [[], [], [], [], []]
@@ -290,7 +290,7 @@ class TemporalActionSegmentation(object):
 	def test(self):
 		print("Testing")
 		rnn_model = self.build_model()
-		rnn_model.load_weights('../saved_model/p3_weights.h5')
+		rnn_model.load_weights('saved_model/p3_weights.h5')
 		pred = rnn_model.predict(self.features_valid)
 		print("pred.shape =", pred.shape)
 		pred = np.argmax(pred, axis = -1)
