@@ -158,12 +158,12 @@ class TrimmedActionRecognition(object):
 		np.save('../report/p2_val_acc', h4)
 
 		print('Save model')
-		rnn_model.save('../saved_model/p2_rnn_weights.h5')
+		rnn_model.save('saved_model/p2_rnn_weights.h5')
 
 	def test(self):
 		print("Testing")
 		rnn_model = self.build_model()
-		rnn_model.load_weights('../saved_model/p2_rnn_weights.h5')
+		rnn_model.load_weights('saved_model/p2_rnn_weights.h5')
 		print("\nEval =", rnn_model.evaluate(self.features_valid, self.y_valid))
 		pred = rnn_model.predict(self.features_valid)
 		print("pred.shape =", pred.shape)
@@ -184,7 +184,7 @@ class TrimmedActionRecognition(object):
 		model.add(Dense(512*2, activation='relu', name="FC1"))
 		#model.add(Dropout(0.5))
 
-		model.load_weights('../saved_model/p2_rnn_weights.h5', by_name = True)
+		model.load_weights('saved_model/p2_rnn_weights.h5', by_name = True)
 		features_top = model.predict(self.features_valid)
 		print("features_top =", features_top.shape)
 		np.save("../report/p2_features", features_top)

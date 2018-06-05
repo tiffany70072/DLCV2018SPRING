@@ -174,12 +174,12 @@ class DataPreprocessing(object):
 		np.save('../report/p1_val_acc', h4)
 			
 		print('Save model')
-		cnn_model.save('../saved_model/p1_weights_2.h5')
+		cnn_model.save('saved_model/p1_weights_2.h5')
 
 	def test(self):
 		print("Testing")
 		cnn_model = self.build_cnn_model()
-		cnn_model.load_weights('../saved_model/p1_cnn_weights.h5')
+		cnn_model.load_weights('saved_model/p1_cnn_weights.h5')
 		pred = cnn_model.predict(self.features_valid)
 		print("\nEval =", cnn_model.evaluate(self.features_valid, self.y_valid))
 		print("pred.shape =", pred.shape)
@@ -196,7 +196,7 @@ class DataPreprocessing(object):
 		inputs = Input(shape = (2048, ))
 		h = Dense(2048, activation = 'relu')(inputs) #(concat)
 		model = Model(inputs=inputs, outputs=h)
-		model.load_weights('../saved_model/p1_cnn_weights.h5', by_name = True)
+		model.load_weights('saved_model/p1_cnn_weights.h5', by_name = True)
 
 		features_top = model.predict(self.features_valid)
 		print("features_top =", features_top.shape)
