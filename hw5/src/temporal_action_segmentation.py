@@ -304,7 +304,6 @@ class TemporalActionSegmentation(object):
 		for i in range(5):
 			fout = open(sys.argv[2] + self.category[i] + '.txt', 'w')
 			for j in range(len(pred[i])):
-				#print(pred[i])
 				#fout.write("%d\t" %real[i][j])
 				fout.write("%d\n" %pred[i][j])
 			fout.close()
