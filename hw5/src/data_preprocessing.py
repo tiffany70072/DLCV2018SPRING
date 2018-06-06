@@ -16,11 +16,11 @@ from keras.preprocessing.image import ImageDataGenerator
 
 from tensorflow import ConfigProto
 import tensorflow as tf
-config = ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.2
-sess = tf.Session(config=config)
+#config = ConfigProto()
+#config.gpu_options.per_process_gpu_memory_fraction = 0.2
+#sess = tf.Session(config=config)
 import keras
-keras.backend.set_session(sess)
+#keras.backend.set_session(sess)
 
 class DataPreprocessing(object):
 	def __init__(self):

@@ -18,11 +18,11 @@ from keras.layers.wrappers import TimeDistributed
 
 from tensorflow import ConfigProto
 import tensorflow as tf
-config = ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.2
-sess = tf.Session(config=config)
+#config = ConfigProto()
+#config.gpu_options.per_process_gpu_memory_fraction = 0.2
+#sess = tf.Session(config=config)
 import keras
-keras.backend.set_session(sess)
+#keras.backend.set_session(sess)
 
 class TemporalActionSegmentation(object):
 	def __init__(self):
@@ -64,6 +64,9 @@ class TemporalActionSegmentation(object):
 		video_list.sort()
 		print(video_list, len(video_list))
 		if data == 'valid': 
+			self.idx_begin = np.empty([5], dtype = np.uint8)
+			self.idx_end = np.empty([5], dtype = np.uint8)
+			self.idx_begin[0] = 0
 			self.category = video_list
 			print("category =", self.category)
 
@@ -86,6 +89,13 @@ class TemporalActionSegmentation(object):
 			one_video = self.cut(one_video)
 			videos = np.concatenate([videos, one_video], axis = 0)
 
+			if data == 'valid':
+				if i != 0: 
+					self.idx_begin[i] = self.idx_end[i-1] + 1
+				self.idx_end[i] = self.idx_begin[i] + one_video.shape[0] - 1
+			
+		if data == 'valid': print('idx =', self.idx_begin, self.idx_end)
+
 		print("videos =", videos.shape, videos[0][0][0][0])
 		return videos
 
@@ -98,10 +108,7 @@ class TemporalActionSegmentation(object):
 		video_list.sort()
 		print(video_list, len(video_list))
 		labels = np.empty([0, self.max_length], dtype = np.uint8)
-		if data == 'valid': 
-			self.idx_begin = np.empty([5], dtype = np.uint8)
-			self.idx_end = np.empty([5], dtype = np.uint8)
-			self.idx_begin[0] = 0
+		
 		
 		for i, video in enumerate(video_list):
 			#image_list = [file for file in os.listdir(path + video + '/')]
@@ -117,12 +124,6 @@ class TemporalActionSegmentation(object):
 			label = self.cut(label)
 			labels = np.concatenate([labels, label], axis = 0)
 
-			if data == 'valid':
-				if i != 0: 
-					self.idx_begin[i] = self.idx_end[i-1] + 1
-				self.idx_end[i] = self.idx_begin[i] + label.shape[0] - 1
-			
-		if data == 'valid': print('idx =', self.idx_begin, self.idx_end)
 		print("labels =", labels.shape, labels[0][:10])
 
 		return labels
